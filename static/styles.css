@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 50px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+#features {
+    padding: 40px 20px;
+}
+
+#features h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.feature {
+    display: inline-block;
+    width: 30%;
+    margin: 0 1%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.feature h3 {
+    color: #4CAF50;
+}
+
+#get-started {
+    padding: 40px 20px;
+}
+
+#get-started button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#get-started button:hover {
+    background-color: #45a049;
+}
+
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+}
+
+#task-list button {
+    margin-left: 8px;
+}
+#task-list li.completed span {
+    text-decoration: line-through;
+    color: gray;
+    opacity: 0.6;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    margin-top: 40px;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Study Planner - jerx study guide yup</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"/>
+        <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>Study Planner</h1>
+            <p>Organize your studies and achieve your goals efficiently.</p>
+        </header>
+        
+        <section id="features">
+            <h2>Features</h2>
+            <div class="feature">
+                <h3>Plan Your Schedule</h3>
+                <p>Create personalized study plans tailored to your needs.</p>
+            </div>
+            <div class="feature">
+                <h3>Track Progress</h3>
+                <p>Monitor your advancement and stay motivated.</p>
+            </div>
+            <div class="feature">
+                <h3>Stay Organized</h3>
+                <p>Keep all your study materials in one place.</p>
+            </div>
+        </section>
+        
+        <section id="get-started">
+            <button id="start-btn">Get Started</button>
+        </section>
+        
+        <section id="planner">
+            <h2>Your tasks</h2>
+
+            <form id="task-form">
+                <input type="text" id="task-input" placeholder="Task Name" required>
+                <input type="text" id="task-course" placeholder="Course" required>
+                <input type="date" id="task-date" required>
+                <button type="submit" id="add-task-btn">Add Task</button>
+            </form>
+
+            <ul id="task-list"></ul>
+        </section>
+        <footer>
+            <p>&copy; 2026 Study Planner. Built for learners.</p>
+        </footer>
+    </body>
+</html>
