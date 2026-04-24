@@ -94,11 +94,41 @@ function createTaskElement(task) {
 
         taskItem.remove();
     });
-    
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+
+    editBtn.addEventListener('click', async function() {
+        const newName = prompt('Edit task name:', task.name);
+        const newCourse = prompt('Edit course name:', task.course);
+        const newDate = prompt('Edit due date (YYYY-MM-DD):', task.due_date);
+        if (newName && newCourse && newDate) {
+            const response = await fetch(`/api/tasks/${task.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: newName, course: newCourse, due_date: newDate })
+            });
+            
+            if (!response.ok) {
+                alert('Could not update task.');
+                return;
+            }
+            task.name = newName;
+            task.course = newCourse;
+            task.due_date = newDate;
+            taskText.textContent = `${task.name} - ${task.course} (Due: ${task.due_date})`;
+        } else {
+            alert('All fields are required to edit the task.');
+            return;
+        }
+    });
+
     taskItem.appendChild(taskText);
     taskItem.appendChild(completeBtn);
     taskItem.appendChild(deleteBtn);
-
+    taskItem.appendChild(editBtn);
     taskList.appendChild(taskItem);
 }
 

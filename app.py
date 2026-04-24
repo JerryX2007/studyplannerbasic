@@ -66,6 +66,7 @@ def create_task():
     
     return jsonify(dict(row)), 201
 
+"""
 @app.patch("/api/tasks/<int:task_id>")
 def update_task(task_id):
     data = request.get_json() or {}
@@ -88,6 +89,50 @@ def update_task(task_id):
         return jsonify({"error": "Task not found."}), 404
     
     return jsonify(dict(row))
+"""
+
+@app.patch("/api/tasks/<int:task_id>")
+def update_task(task_id):
+    data = request.get_json() or {}
+
+    conn = get_db()
+    
+    row = conn.execute(
+        "SELECT id, name, course, due_date, completed FROM tasks WHERE id = ?",
+        (task_id,)
+    ).fetchone()
+    
+    if row is None:
+        conn.close()
+        return jsonify({"error": "Task not found."}), 404
+    
+    current = dict(row)
+    name = data.get("name", current["name"]).strip()
+    course = data.get("course", current["course"]).strip()
+    due_date = data.get("due_date", current["due_date"]).strip()
+    
+    if "completed" in data:
+        completed = 1 if data["completed"] else 0
+    else:
+        completed = current["completed"]
+    
+    if not name or not course or not due_date:
+        conn.close()
+        return jsonify({"error": "All fields are required."}), 400
+
+    conn.execute(
+        "UPDATE tasks SET name = ?, course = ?, due_date = ?, completed = ? WHERE id = ?",
+        (name, course, due_date, completed, task_id)
+    )
+    conn.commit()
+    updated = conn.execute(
+        "SELECT id, name, course, due_date, completed FROM tasks WHERE id = ?",
+        (task_id,)
+    ).fetchone()
+    conn.close()
+    return jsonify(dict(updated))
+
+
     
 
 @app.delete("/api/tasks/<int:task_id>")
